@@ -14,9 +14,7 @@ Management has raised concerns about a potential data exfiltration attempt by an
 
 ## High-Level IoC Discovery Plan
 
-- **Check `DeviceProcessEvents`** for suspicious executions of outdated software or any software associated with known vulnerabilities.
-- **Check `DeviceNetworkEvents`** for unusual network activity made by the outdated software or suspicious outbound connections.
-- **Check `DeviceFileEvents`** for modifications to software installation files, directories, and configuration files related to outdated software.
+- **Check `DeviceProcessEvents`** for file manipulation associated with sensitive company information.
 
 ---
 
