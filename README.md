@@ -61,7 +61,7 @@ DeviceProcessEvents
 
 ---
 
-### **Chronological Event Timeline**
+## **Chronological Event Timeline**
 
 ### 1. Process Execution - Encrypting Data (Command: `openssl`)
 
@@ -76,7 +76,7 @@ DeviceProcessEvents
 - **Time:** `Feb 6, 2025 9:24:37 AM`
 - **Event:** The employee **"baddog"** executed the **`mv`** command to move files on the system.
 - **Action:** Process execution detected.
-- **Command:** `mv /usr/bin/mv`
+- **Command:** `mv /home/baddog/extracted_data/fake_cards.enc /home/baddog/extracted_data/`
 - **File Path:** `/usr/bin/mv`
 
 ### 3. Process Execution - Encrypting Data (Command: `openssl`)
@@ -92,27 +92,28 @@ DeviceProcessEvents
 - **Time:** `Feb 6, 2025 9:48:01 AM`
 - **Event:** The employee **"baddog"** executed the **`mv`** command again, likely for moving files to a new location after encryption.
 - **Action:** Process execution detected.
-- **Command:** `mv /usr/bin/mv`
+- **Command:** `mv /home/baddog/extracted_data/fake_user.enc /home/baddog/extracted_data/`
 - **File Path:** `/usr/bin/mv`
 
 ---
 
-## Summary
+### **Summary**
 
-The user "baddog" on the device "thlinux.p2zfvso05mlezjev3ck4vqd3kd.cx.internal.cloudapp.net" unknowingly downloaded and installed an outdated version of the Apache HTTP Server (`httpd-2.4.39`), which contains several known vulnerabilities. The employee executed commands to extract and install the software, activating it on the system. Once the outdated version was installed, the Apache service was started.
+The user "baddog" on the device "thlinux" executed several actions that resulted in the movement and encryption of sensitive files, likely to obscure or secure them before potential exfiltration. The employee executed commands to move files and encrypt them using **`mv`** and **`openssl`** commands. The following files were involved:
 
-While the software was (probably) installed without malicious intent, its outdated nature and the associated vulnerabilities pose significant security risks. The use of this outdated version of Apache exposes the system to potential exploits by malicious actors targeting known vulnerabilities in this version.
+- **Encrypted Files**: `fake_cards.enc`, `fake_user.enc`
+- **Original Files**: `fake_cards.txt`, `fake_user.txt`
 
-These actions suggest that the employee inadvertently introduced a security risk by using outdated software, which could be exploited. Immediate action is required to update the software and mitigate any associated risks to the system.
+These actions indicate that **"baddog"** was involved in file manipulation, including movement and potential encryption of sensitive data on the device **"thlinux"**. Immediate action is required to assess the integrity of the files and investigate whether any unauthorized data movement or exfiltration occurred.
 
 ---
 
 ## Response Taken
 
-The use of outdated software and the potential vulnerabilities introduced by the employee "baddog" on the endpoint **"thlinux.p2zfvso05mlezjev3ck4vqd3kd.cx.internal.cloudapp.net"** were confirmed. The device was immediately isolated from the network to prevent further risks. 
+The suspicious file manipulation and encryption activities performed by the employee "baddog" on the device "thlinux" were confirmed. The device was immediately isolated to prevent any further risks.
 
-I suggest the outdated version of Apache HTTP Server be removed or updated to the latest, secure version. The employee's direct manager was notified, and a recommendation was made to educate the employee on the importance of using up-to-date software and the risks associated with using outdated versions that may have known vulnerabilities.
+I suggest the encrypted files (`fake_cards.enc`, `fake_user.enc`) be reviewed to ensure no sensitive data was exfiltrated. The employee's direct manager was notified, and a recommendation was made to educate the employee on the risks of file manipulation and unauthorized encryption usage.
 
-Further monitoring is being conducted to ensure that no unauthorized access or data exfiltration occurred during the period of exposure.
+Further monitoring is being conducted to ensure no unauthorized access or data exfiltration occurred during the period of exposure.
 
 ---
