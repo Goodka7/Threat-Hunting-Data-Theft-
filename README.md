@@ -57,7 +57,7 @@ DeviceProcessEvents
 | order by Timestamp desc
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/5fd48424-aaa7-4228-a241-b2d721d4ddc5">
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/c216c85e-0861-4d6f-9ec5-08114e2116a5">
+<img width="1212" alt="image" src="https://github.com/user-attachments/assets/507a42b8-950d-4b7e-8466-76c56cbe9b72">
 
 ---
 
