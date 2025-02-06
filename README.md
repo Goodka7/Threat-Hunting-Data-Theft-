@@ -44,31 +44,39 @@ This command is associated with the execution of the openssl encryption tool. Th
 
 These findings suggest that "baddog" was involved in file manipulation, including movement and potential encryption of sensitive data on the device "thlinux". Further investigation is required to determine the exact files involved in these actions.
 
+**Query used to locate events:**
+
 ```kql
 DeviceProcessEvents
 | where DeviceName == 'thlinux'
 | order by Timestamp desc
-**Query used to locate events:**
+
+DeviceProcessEvents
+| where DeviceName == 'thlinux'
+| where ProcessCommandLine contains "mv" or ProcessCommandLine contains "openssl"
+| order by Timestamp desc
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/5fd48424-aaa7-4228-a241-b2d721d4ddc5">
+<img width="1212" alt="image" src="https://github.com/user-attachments/assets/c216c85e-0861-4d6f-9ec5-08114e2116a5">
 
 ---
 
-### 2. Searched the `DeviceNetworkEvents` Table
+### 2. Searched the `DeviceFileEvents` Table
 
-Searched for any events where the `DeviceName` was **"thlinux.p2zfvso05mlezjev3ck4vqd3kd.cx.internal.cloudapp.net"** and `AccountName` was **"baddog"** to detect unauthorized software downloads.
+To narrow the focus and identify the specific files involved in the suspicious activities, we refined the query to look for signs of file movements and encryption actions on **"thlinux"** run by **"baddog"**.
 
-At **Feb 3, 2025 10:07:05 AM**, the user **"baddog"** initiated the command: `wget https://archive.apache.org/dist/httpd/httpd-2.4.39.tar.gz`
+At Feb 6, 2025 9:48:01 AM, the user "baddog" executed the following command on the device "thlinux":
 
-This log further confirms that a outdated version of Apache HTTP Server was downloadead onto the device.
+`
+mv /usr/bin/mv
+`
 
-**Query used to locate event:**
 
+Using the following query:
 ```kql
-DeviceNetworkEvents
-| where DeviceName == "thlinux.p2zfvso05mlezjev3ck4vqd3kd.cx.internal.cloudapp.net"
-| where InitiatingProcessAccountName == "baddog"
-| project Timestamp, DeviceName, InitiatingProcessAccountName, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessCommandLine
+DeviceFileEvents
+| where DeviceName == 'thlinux'
+| where ActionType in ('Move', 'Copy')
 | order by Timestamp desc
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/145de6e0-1938-4540-8029-9e8903a4fdbc">
