@@ -61,93 +61,39 @@ DeviceProcessEvents
 
 ---
 
-### 2. Searched the `DeviceFileEvents` Table
+### **Chronological Event Timeline**
 
-To narrow the focus and identify the specific files involved in the suspicious activities, we refined the query to look for signs of file movements and encryption actions on **"thlinux"** run by **"baddog"**.
+### 1. Process Execution - Encrypting Data (Command: `openssl`)
 
-At Feb 6, 2025 9:48:01 AM, the user "baddog" executed the following command on the device "thlinux":
-
-`
-mv /usr/bin/mv
-`
-
-
-Using the following query:
-```kql
-DeviceFileEvents
-| where DeviceName == 'thlinux'
-| where ActionType in ('Move', 'Copy')
-| order by Timestamp desc
-```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/145de6e0-1938-4540-8029-9e8903a4fdbc">
-
----
-
-### 3. Searched the `DeviceFileEvents` Table
-
-Detect the creation or execution of a outdated and/or vulnerable version of software.
-
-At **Feb 3, 2025 10:07:30 AM**, the user **"baddog"** executed the following command on the device **"thlinux.p2zfvso05mlezjev3ck4vqd3kd.cx.internal.cloudapp.net"**:
-```
-tar -xzvf httpd-2.4.39.tar.gz
-```
-
-This created a file in the path `/home/baddog/httpd-2.4.39/support/apachectl.in`, which shows that the outdated software was installed on the system. 
-
-**Query used to locate events:**
-
-```kql
-DeviceFileEvents
-| where FileName contains "httpd" or FileName contains "apache" or FileName contains "openssl" or FileName contains "tar" or FileName contains "rpm" or FileName contains "make"
-| where ActionType in ("FileModified", "FileCreated")
-| where InitiatingProcessAccountName == "baddog"
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, FileName, FolderPath, SHA256, InitiatingProcessCommandLine
-| order by Timestamp desc
-```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/d9d15ba4-2780-458d-9e39-004ca06f5e00">
-
----
-
-### Chronological Event Timeline 
-
-### 1. File Download - Outdated Software Downloaded
-
-- **Time:** `Feb 3, 2025 10:07:30 AM`
-- **Event:** The employee "baddog" downloaded an outdated version of Apache HTTP Server (2.4.39) to the system.
-- **Action:** File download detected.
-- **File Path:** `httpd-2.4.39.tar.gz`
-
-### 2. Process Execution - Extracting the Software Archive
-
-- **Time:** `Feb 3, 2025 10:07:30 AM`
-- **Event:** The employee executed the command to extract the downloaded Apache HTTP Server archive.
+- **Time:** `Feb 6, 2025 9:24:31 AM`
+- **Event:** The employee **"baddog"** executed the **`openssl`** command to encrypt data on the system.
 - **Action:** Process execution detected.
-- **Command:** `tar -xzvf httpd-2.4.39.tar.gz`
-- **File Path:** `/home/baddog/httpd-2.4.39`
+- **Command:** `openssl`
+- **File Path:** `/usr/bin/openssl`
 
-### 3. Process Execution - Configuring and Installing the Software
+### 2. Process Execution - File Movement (Command: `mv`)
 
-- **Time:** `Feb 3, 2025 10:10:00 AM`
-- **Event:** The employee configured and installed the Apache HTTP Server.
+- **Time:** `Feb 6, 2025 9:24:37 AM`
+- **Event:** The employee **"baddog"** executed the **`mv`** command to move files on the system.
 - **Action:** Process execution detected.
-- **Command:** `./configure --prefix=/usr/local/apache2 && make && sudo make install`
-- **File Path:** `/usr/local/apache2`
+- **Command:** `mv /usr/bin/mv`
+- **File Path:** `/usr/bin/mv`
 
-### 4. Process Execution - Starting Apache Service
+### 3. Process Execution - Encrypting Data (Command: `openssl`)
 
-- **Time:** `Feb 3, 2025 10:25:33 AM`
-- **Event:** The employee started the Apache HTTP Server service.
+- **Time:** `Feb 6, 2025 9:47:42 AM`
+- **Event:** The employee **"baddog"** executed the **`openssl`** command again to encrypt data on the system.
 - **Action:** Process execution detected.
-- **Command:** `sudo systemctl start apache2`
-- **File Path:** `/usr/local/apache2/bin/apachectl`
+- **Command:** `openssl`
+- **File Path:** `/usr/bin/openssl`
 
-### 5. Process Execution - Verifying Service Status
+### 4. Process Execution - File Movement (Command: `mv`)
 
-- **Time:** `Feb 3, 2025 10:26:00 AM`
-- **Event:** The employee attempted to verify the status of the Apache service.
+- **Time:** `Feb 6, 2025 9:48:01 AM`
+- **Event:** The employee **"baddog"** executed the **`mv`** command again, likely for moving files to a new location after encryption.
 - **Action:** Process execution detected.
-- **Command:** `sudo systemctl status apache2`
-- **File Path:** `/usr/local/apache2/bin/apachectl`
+- **Command:** `mv /usr/bin/mv`
+- **File Path:** `/usr/bin/mv`
 
 ---
 
