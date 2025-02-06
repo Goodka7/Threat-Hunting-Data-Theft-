@@ -2,22 +2,13 @@
 
 ## Steps the "Bad Actor" took to Create Logs and IoCs:
 
-1. Downloaded the outdated version of Apache 2.4.39 from the official Apache archives to the local machine: `wget https://archive.apache.org/dist/httpd/httpd-2.4.39.tar.gz`
+1. Create a folder and a few files housing "sensetive corparate" information.
+2. Create a folder for the bad actor to transfer the files to.
+3. Move the files into the bad actors folder.
+4. Encrypt the files using OpenSSL.
+5. Make another folder that mimics an External Drive.
+6. Move the files to said folder.
 
-2. Install the outdated software silently:
-`tar -xzvf httpd-2.4.39.tar.gz
-cd httpd-2.4.39
-./configure --prefix=/usr/local/apache2
-make
-sudo make install`
-
-3. Executed the Outdated Software:
-- Started the Apache service to verify that it was functioning properly using:
-`sudo /usr/local/apache2/bin/apachectl start`
-
-4. Verified the Apache service status and verified that it was working by accessing the local server and reviewing the logs:
-`ps aux | grep apache2
-tail -f /usr/local/apache2/logs/access_log`
 
 ## Tables Used to Detect IoCs:
 
