@@ -1,4 +1,4 @@
-<img width="400" src="https://github.com/user-attachments/assets/c741101c-04f7-4115-90f3-77d677585dbd"/>
+<img width="400" src="https://github.com/user-attachments/assets/2b3b0257-dedc-4186-ad29-3c0994f45ca2"/>
 
 # Threat Hunt Report: Data Theft
 
@@ -27,6 +27,7 @@ Management has raised concerns about a potential data exfiltration attempt by an
 Searched for processes running on the system, specifically looking for signs of suspicious file movement and encryption activities. Initial investigations led to the discovery of potentially suspicious processes on the device **"thlinux"** run by the user **"baddog"**.
 
 At Feb 6, 2025 9:48:01 AM, the user "baddog" executed the following command on the device "thlinux":
+
 `
 mv /usr/bin/mv
 `
