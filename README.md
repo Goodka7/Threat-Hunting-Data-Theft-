@@ -1,7 +1,8 @@
 <img width="400" src="https://github.com/user-attachments/assets/2b3b0257-dedc-4186-ad29-3c0994f45ca2"/>
 
 # Threat Hunt Report: Data Theft
-
+- [Scenario Creation](https://github.com/Goodka7/Threat-Hunting-Malicious-Execution-/blob/main/resources/Threat-Hunt-Event(Data%20Theft).md)
+- 
 ## Platforms and Languages Leveraged
 - Linux (Ubuntu 22.04) Virtual Machines (Microsoft Azure)
 - EDR Platform: Microsoft Defender for Endpoint
